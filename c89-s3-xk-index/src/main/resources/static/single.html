@@ -1,0 +1,332 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>影片信息</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Movie_store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- start plugins -->
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+	<div class="container_wrap">
+		<div class="header_top">
+		    <div class="col-sm-3 logo"><a href="index.html"><img src="images/logo.png" alt=""/></a></div>
+		    <div class="col-sm-6 nav">
+			  <ul>
+				 <li> <span class="simptip-position-bottom simptip-movable" data-tooltip="comic"><a href="movie.html"> </a></span></li>
+				 <li><span class="simptip-position-bottom simptip-movable" data-tooltip="movie"><a href="movie.html"> </a> </span></li>
+				 <li><span class="simptip-position-bottom simptip-movable" data-tooltip="video"><a href="movie.html"> </a></span></li>
+				 <li><span class="simptip-position-bottom simptip-movable" data-tooltip="game"><a href="movie.html"> </a></span></li>
+				 <li><span class="simptip-position-bottom simptip-movable" data-tooltip="tv"><a href="movie.html"> </a></span></li>
+				 <li><span class="simptip-position-bottom simptip-movable" data-tooltip="more"><a href="movie.html"> </a></span></li>
+			 </ul>
+			</div>
+			<div id="topNav" class="col-sm-3 header_right">
+			   <ul class="header_right_box">
+				 <li><img src="images/p1.png" alt=""/></li>
+				 <li><p> <a href="login.html" v-if=" user=='' ">登录</a>
+						<a v-if="user!=null">{{user.name}}</a></p></li>
+				 <li style="font-size: 1.2em;font-weight: 600;margin-top: 4px;"class="last">&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:black" @click="logout()" >退出</a></li>
+				 <div class="clearfix"> </div>
+			   </ul>
+			</div>
+			<script type="text/javascript">
+			var v2 = new Vue({
+				el:"#topNav",
+				data:{
+					user:{}
+				},
+				created(){
+					axios.get("getLoginedUser").then(res=>{
+						this.user = res.data;
+					})
+				},
+				methods:{
+					logout(){
+						if(confirm("确定要退出登录?")){
+							axios.get("out.s").then(res=>{
+								alert(res.data.msg);
+								location.href = "index.html";
+							});
+						}
+					}
+				}
+			})
+		
+		
+		</script>
+			<div class="clearfix"> </div>
+	      </div>
+	   <div  class="content">
+      	   <div class="movie_top">
+      	         <div class="col-md-9 movie_box">
+      	         <div id="intro">
+                        <div class="grid images_3_of_2">
+                        	<div class="movie_image">
+                                <span class="movie_rating">5.0</span>
+                                <img :src="m.poster" class="img-responsive" alt=""/>
+                            </div>
+                            <div class="movie_rate">
+                            	<div class="rating_desc"><p>您的评分 :</p></div>
+                            	<form action="" class="sky-form">
+							     <fieldset>					
+								   <section>
+								     <div class="rating">
+										<input @click="pf5()"type="radio" name="stars-rating" id="stars-rating-5">
+										<label for="stars-rating-5"><i class="icon-star"></i></label>
+										<input @click="pf4()" type="radio" name="stars-rating" id="stars-rating-4">
+										<label for="stars-rating-4"><i class="icon-star"></i></label>
+										<input @click="pf3()" type="radio" name="stars-rating" id="stars-rating-3">
+										<label for="stars-rating-3"><i class="icon-star"></i></label>
+										<input @click="pf2()" type="radio" name="stars-rating" id="stars-rating-2">
+										<label for="stars-rating-2"><i class="icon-star"></i></label>
+										<input @click="pf1()" type="radio" name="stars-rating" id="stars-rating-1">
+										<label for="stars-rating-1"><i class="icon-star"></i></label>
+									 </div>
+								  </section>
+							    </fieldset>
+						  	   </form>
+						  	   <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                        <div class="desc1 span_3_of_2">
+                        	<p class="movie_option"><strong>电影名: </strong><a href="#">{{m.name}}</a></p>
+                        	<p class="movie_option"><strong>类别: </strong>{{m.tags}}</p>
+                        	<p class="movie_option"><strong>上映年份: </strong>{{m.releaseDate}}</p>
+                        	<p class="movie_option"><strong>导演: </strong>{{m.director}}</p>
+                        	<p class="movie_option"><strong>电影时长: </strong>{{m.times}}</p>
+
+                            <div class="down_btn"><a class="btn1" href="#"><span> </span>下载</a></div>
+                         </div>
+                        <div class="clearfix"> </div>
+                        <p class="m_4" v-html="m.intro">电影简介</p>
+                        </div>
+  <script type="text/javascript">
+			var vue = new Vue({
+				el : "#intro",
+				data :{
+					m:[]
+				},
+				created(){
+					axios.get("movie.s?op=queryMovieById&id="+location.hash.substring(1)).then(res=>{
+						this.m = res.data;
+					})
+				},
+				methods:{
+					pf1(){
+     					  var params = new URLSearchParams();
+     					  //console.info(this.m.name);
+     					 params.append("name",this.m.name);
+     					  params.append("score",1);
+     					 params.append("skr",0);
+     					  axios.post("pf",params).then(res=>{
+     						  if(res.data.code==0){
+     							 alert(res.data.msg);
+     						  }else if(res.data.code==1){
+     							  alert(res.data.msg);
+     						  }
+     						  //location.href = "single.html#"+location.hash.substring(1);
+     					  })
+     				  },
+					pf2(){
+     					  var params = new URLSearchParams();
+     					  var mid = location.hash.substring(1);
+     					 params.append("name",this.m.name);
+     					  params.append("score",2);
+     					 params.append("skr",0);
+     					  axios.post("pf",params).then(res=>{
+     						  if(res.data.code==0){
+     							 alert(res.data.msg);
+     						  }else if(res.data.code==1){
+     							  alert(res.data.msg);
+     						  }
+     						  //location.href = "single.html#"+location.hash.substring(1);
+     					  })
+     				 },
+					pf3(){
+     					  var params = new URLSearchParams();
+     					  var mid = location.hash.substring(1);
+     					 params.append("name",this.m.name);
+     					  params.append("score",3);
+     					  params.append("skr",0);
+     					  axios.post("pf",params).then(res=>{
+     						  if(res.data.code==0){
+     							 alert(res.data.msg);
+     						  }else if(res.data.code==1){
+     							  alert(res.data.msg);
+     						  }
+     						  //location.href = "single.html#"+location.hash.substring(1);
+     					  })
+     				 },
+					pf4(){
+     					  var params = new URLSearchParams();
+     					  var mid = location.hash.substring(1);
+     					 params.append("name",this.m.name);
+     					  params.append("score",4);
+     					  params.append("skr",0);
+     					  axios.post("pf",params).then(res=>{
+     						  if(res.data.code==0){
+     							 alert(res.data.msg);
+     						  }else if(res.data.code==1){
+     							  alert(res.data.msg);
+     						  }
+     						  //location.href = "single.html#"+location.hash.substring(1);
+     					  })
+     				 },
+					pf5(){
+     					  var params = new URLSearchParams();
+     					  var mid = location.hash.substring(1);
+     					 params.append("name",this.m.name);
+     					  params.append("score",5);
+     					  axios.post("pf",params).then(res=>{
+     						  if(res.data.code==0){
+     							 alert(res.data.msg);
+     						  }else if(res.data.code==1){
+     							  alert(res.data.msg);
+     						  }
+     						  //location.href = "single.html#"+location.hash.substring(1);
+     					  })
+     				 }
+				}
+			})
+		</script>
+		                 <form name="form1" id="form1" method="form1">
+							<div class="text">
+			                   <textarea v-model="xkmsg.content" ></textarea>
+			                </div>
+			                <div class="form-submit1">
+					           <input @click="addMsg" name="button" type="button" id="submit" value="发布留言"><br>
+					        </div>
+							<div class="clearfix"></div>
+                 		</form>
+                 		<script type="text/javascript">
+                 		  var v = new Vue({
+                 			  el : "#form1",
+                 			  data : {
+                 				  xkmsg : {
+                 					  content : ""
+                 				  }
+                 			  },
+                 			  methods : {
+                 				  addMsg(){
+                 					  var params = new URLSearchParams();
+                 					  var mid = location.hash.substring(1);
+                 					  params.append("mid",mid)
+                 					  params.append("content",this.xkmsg.content);
+                 					  axios.post("addMsg",params).then(res=>{
+                 						  if(res.data.code==0){
+                 							 alert(res.data.msg);
+                 						  }else if(res.data.code==1){
+                 							  alert(res.data.msg);
+                 							  location.href = "single.html?a="+new Date()+"#"+mid;
+                 						  }
+                 						  //location.href = "single.html#"+location.hash.substring(1);
+                 					  })
+                 				  }
+                 			  }
+                 		  })
+                 		
+                 		</script>
+                 		
+		                <div class="single">
+		                <h1>评论总数</h1>
+		                <ul class="single_list" id="mymsg">
+					        <li v-for=" m in mlist">
+					            <div class="preview"><a href="#"><img src="images/2.jpg" class="img-responsive" alt=""></a></div>
+					            <div class="data">
+					                <div class="title">昵称：{{m.createName}}/留言时间：{{m.createTime}}</div>
+					                <p>{{m.createName}}：{{m.content}}</p>
+					            </div>
+					            <div class="clearfix"></div>
+					        </li>
+			  			</ul>
+			  			<script>
+			  				new Vue({
+			  					el : "#mymsg",
+			  					data : { 
+			  						mlist : []
+			  				    },
+			  					created(){
+			  	 					axios.get("xkmsg.s?op=showMsg&mid="+location.hash.substring(1)).then(res=>{
+			  							this.mlist = res.data;
+			  						})
+			  					}
+			  					
+			  				})
+			  			
+			  			
+			  			</script>
+			  			
+                      </div>
+                      </div>
+                      <div class="col-md-3">
+                      	
+		               </div> 
+                      <div class="clearfix"> </div>
+                  </div>
+           </div>
+    </div>
+</div>
+<div class="container"> 
+ <footer id="footer">
+ 	<div id="footer-3d">
+		<div class="gp-container">
+			<span class="first-widget-bend"> </span>
+		</div>		
+	</div>
+    <div id="footer-widgets" class="gp-footer-larger-first-col">
+		<div class="gp-container">
+            <div class="footer-widget footer-1">
+            	<div class="wpb_wrapper">
+					<img src="images/f_logo.png" alt=""/>
+				</div> 
+	          <br>
+	          <p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+			  <p class="text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
+			 </div>
+			 <div class="footer_box">
+			  <div class="col_1_of_3 span_1_of_3">
+					<h3>Categories</h3>
+					<ul class="first">
+						<li><a href="#">Dance</a></li>
+						<li><a href="#">History</a></li>
+						<li><a href="#">Specials</a></li>
+					</ul>
+		     </div>
+		     <div class="col_1_of_3 span_1_of_3">
+					<h3>Information</h3>
+					<ul class="first">
+						<li><a href="#">New products</a></li>
+						<li><a href="#">top sellers</a></li>
+						<li><a href="#">Specials</a></li>
+					</ul>
+		     </div>
+		     <div class="col_1_of_3 span_1_of_3">
+					<h3>Follow Us</h3>
+					<ul class="first">
+						<li><a href="#">Facebook</a></li>
+						<li><a href="#">Twitter</a></li>
+						<li><a href="#">Youtube</a></li>
+					</ul>
+					<div class="copy">
+				      <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+			        </div>
+		     </div>
+		    <div class="clearfix"> </div>
+	        </div>
+	        <div class="clearfix"> </div>
+		</div>
+	</div>
+  </footer>
+</div>		
+</body>
+</html>

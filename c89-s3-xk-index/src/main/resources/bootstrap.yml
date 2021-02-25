@@ -1,0 +1,14 @@
+spring:
+   application:
+      name: xk-index
+   cloud:
+      config:
+         uri: http://localhost:9000
+         #分支
+         label: main
+   datasource:
+      driverClassName: com.mysql.jdbc.Driver
+      #&serverTimezone=GMT%2B8
+      url: jdbc:mysql://127.0.0.1/C89-S2-xk?useSSL=false
+      username: root
+      password: a   
